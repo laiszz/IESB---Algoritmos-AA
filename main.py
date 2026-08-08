@@ -1,7 +1,7 @@
 import auxiliares.monta_cardapio
 
 
-cardapio_promocional = False
+cardapio_promocional = True
 
 def carrega_cardapio():
     if cardapio_promocional:

@@ -18,7 +18,7 @@ def monta_cardapio_normal() -> list:
 def monta_cardapio_promocional() -> list:
     lista_promocional = []
 
-    for produto in monta_cardapio_normal():
+    for produto in produtos:
         if produto.promocao:
             lista_promocional.append(produto)
 
