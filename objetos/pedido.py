@@ -9,27 +9,27 @@ class Pedido:
 
     @property
     def produtos(self) -> list:
-        return self.produtos
+        return self._produtos
 
     @property
     def preco_total(self) -> float:
-        return self.preco_total
+        return self._preco_total
 
     @property
     def cliente_cpf(self) -> str:
-        return self.cliente_cpf
+        return self._cliente_cpf
 
     @property
     def cliente_fidelidade(self) -> bool:
-        return self.cliente_fidelidade
+        return self._cliente_fidelidade
 
     @property
     def preco_total_promocional(self) -> float:
-        return self.preco_total_promocional
+        return self._preco_total_promocional
 
     @property
     def pontos_acumulados(self) -> int:
-        return self.pontos_acumulados
+        return self._pontos_acumulados
 
     @produtos.setter
     def produtos(self, value):

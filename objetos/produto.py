@@ -14,27 +14,27 @@ class Produto:
 
     @property
     def nome(self) -> str:
-        return self.nome
+        return self._nome
 
     @property
     def ingredientes(self) -> str:
-        return self.ingredientes
+        return self._ingredientes
 
     @property
     def preco(self) -> float:
-        return self.preco
+        return self._preco
 
     @property
     def promocao(self) -> bool:
-        return self.promocao
+        return self._promocao
 
     @property
     def preco_promocional(self) -> float:
-        return self.preco_promocional
+        return self._preco_promocional
 
     @property
     def estoque(self) -> int:
-        return self.estoque
+        return self._estoque
 
     @codigo.setter
     def codigo(self, value):

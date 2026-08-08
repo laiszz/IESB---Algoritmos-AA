@@ -8,23 +8,23 @@ class Cliente:
 
     @property
     def cpf(self) -> str:
-        return self.cpf
+        return self._cpf
 
     @property
     def nome(self) -> str:
-        return self.nome
+        return self._nome
 
     @property
     def fidelidade(self) -> bool:
-        return self.fidelidade
+        return self._fidelidade
 
     @property
     def pontos(self) -> int:
-        return self.pontos
+        return self._pontos
 
     @property
     def total_pedidos(self) -> int:
-        return self.total_pedidos
+        return self._total_pedidos
 
     @cpf.setter
     def cpf(self, value):
