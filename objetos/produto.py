@@ -10,7 +10,7 @@ class Produto:
 
     @property
     def codigo(self) -> int:
-        return self.codigo
+        return self._codigo
 
     @property
     def nome(self) -> str:
