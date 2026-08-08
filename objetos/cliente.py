@@ -15,15 +15,15 @@ class Cliente:
         return self.nome
 
     @property
-    def fidelidade(self) -> str:
+    def fidelidade(self) -> bool:
         return self.fidelidade
 
     @property
-    def pontos(self) -> str:
+    def pontos(self) -> int:
         return self.pontos
 
     @property
-    def total_pedidos(self) -> str:
+    def total_pedidos(self) -> int:
         return self.total_pedidos
 
     @cpf.setter
