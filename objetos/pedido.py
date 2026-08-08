@@ -1,5 +1,5 @@
 class Pedido:
-    def __init__(self, produtos: list, preco_total: float, cliente_cpf: str, cliente_fidelidade: bool, preco_total_promocional: float, pontos_acumulados: int):
+    def __init__(self, produtos: list, preco_total: float, cliente_cpf: str | None, cliente_fidelidade: bool | None, preco_total_promocional: float | None, pontos_acumulados: int | None):
         self.produtos = produtos
         self.preco_total = preco_total
         self.cliente_cpf = cliente_cpf
