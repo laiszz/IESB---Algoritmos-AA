@@ -1,8 +1,9 @@
 class Produto:
-    def __init__(self, codigo: int, nome: str, ingredientes: str, preco: float, promocao: bool, preco_promocional: float, estoque: int):
+    def __init__(self, codigo: int, nome: str, ingredientes: str, categoria: str, preco: float, promocao: bool, preco_promocional: float, estoque: int):
         self.codigo = codigo
         self.nome = nome
         self.ingredientes = ingredientes
+        self.categoria = categoria
         self.preco = preco
         self.promocao = promocao
         self.preco_promocional = preco_promocional
@@ -19,6 +20,10 @@ class Produto:
     @property
     def ingredientes(self) -> str:
         return self._ingredientes
+
+    @property
+    def categoria(self) -> str:
+        return self._categoria
 
     @property
     def preco(self) -> float:
@@ -63,3 +68,7 @@ class Produto:
     @estoque.setter
     def estoque(self, value):
         self._estoque = value
+
+    @categoria.setter
+    def categoria(self, value):
+        self._categoria = value
