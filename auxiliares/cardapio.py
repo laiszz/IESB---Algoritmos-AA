@@ -63,3 +63,4 @@ def monta_tela_cardapio(cardapio_promocional: bool, cardapio: list):
                 print(f"     \t\x1B[3m{produto.ingredientes}\x1B[0m")
 
     print("\n*********************************************************************************")
+    print("\nPressione 0 para sair.")
