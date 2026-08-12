@@ -1,3 +1,5 @@
+import readchar
+
 from objetos.produto import Produto
 
 
@@ -24,7 +26,7 @@ def monta_cardapio(cardapio_promocional: bool) -> list:
     else:
         return produtos
 
-def monta_tela_cardapio(cardapio_promocional: bool, cardapio: list):
+def tela_cardapio(cardapio_promocional: bool, cardapio: list):
     if cardapio_promocional:
         print("*********************************************************************************\n")
         print("\033[1m\t\t\t\tPromoções de Hoje:\033[0m\n")
@@ -64,3 +66,52 @@ def monta_tela_cardapio(cardapio_promocional: bool, cardapio: list):
 
     print("\n*********************************************************************************")
     print("\nPressione 0 para sair.")
+
+def escolhe_cardapio():
+    print("\033[H\033[2J", end="")
+    print("Deseja ver o cardápio completo ou apenas as promoções?")
+    print("\nAperte um dos números abaixo para selecionar uma opção:")
+    print("\033[1m1\033[0m - Ver o cardápio normal")
+    print("\033[1m2\033[0m - Ver o cardápio das promoções")
+    print("\033[1m0\033[0m - Sair")
+
+    try:
+        opcao = int(readchar.readkey())
+
+        if opcao < 0 or opcao > 2:
+            escolhe_cardapio()
+        elif opcao == 1:
+            tela_cardapio(False, monta_cardapio(False))
+            opcoes_cardapio(False, monta_cardapio(False))
+        elif opcao == 2:
+            tela_cardapio(True, monta_cardapio(True))
+            opcoes_cardapio(False, monta_cardapio(False))
+
+    except ValueError:
+        escolhe_cardapio()
+    except KeyboardInterrupt:
+        print("\033[H\033[2J", end="")
+        print("O usuário interrompeu o sistema.")
+    except Exception:
+        print("\033[H\033[2J", end="")
+        print("Ocorreu um erro inesperado, tente novamente.")
+
+def opcoes_cardapio(cardapio_promocional: bool, cardapio: list):
+    try:
+        opcao = int(readchar.readkey())
+
+        if opcao != 0:
+            tela_cardapio(cardapio_promocional, cardapio)
+            opcoes_cardapio(cardapio_promocional, cardapio)
+        else:
+            print(opcao)
+
+    except ValueError:
+        tela_cardapio(cardapio_promocional, cardapio)
+        opcoes_cardapio(cardapio_promocional, cardapio)
+    except KeyboardInterrupt:
+        print("\033[H\033[2J", end="")
+        print("O usuário interrompeu o sistema.")
+    except Exception:
+        print("\033[H\033[2J", end="")
+        print("Ocorreu um erro inesperado, tente novamente.")
