@@ -27,6 +27,7 @@ def monta_cardapio(cardapio_promocional: bool) -> list:
         return produtos
 
 def tela_cardapio(cardapio_promocional: bool, cardapio: list):
+    print("\033[H\033[2J", end="")
     if cardapio_promocional:
         print("*********************************************************************************\n")
         print("\033[1m\t\t\t\tPromoções de Hoje:\033[0m\n")
