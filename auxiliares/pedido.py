@@ -6,7 +6,7 @@ from auxiliares import cadastro
 from auxiliares import cardapio
 from objetos.cliente import Cliente
 from objetos.pedido import Pedido
-from objetos.produto import Produto
+from auxiliares import menu
 
 
 def tela_topo():
@@ -52,6 +52,11 @@ def resumo_pedido(quantidades: dict, valor_total: float, pontos_acumulados: int)
             dados_resumo.append([produto.codigo, produto.nome, quantidade, f"R${produto.preco:.2f}", f"R${(produto.preco * quantidade):.2f}"])
 
     print(tabulate(dados_resumo, cabecalho, tablefmt="grid", floatfmt=".2f", stralign="left", numalign="left"))
+
+    print("\nDeseja finalizar ou cancelar o pedido?")
+    print("\nAperte um dos números abaixo para selecionar uma opção:")
+    print("\033[1m1\033[0m - Finalizar")
+    print("\033[1m2\033[0m - Cancelar")
 
 def informar_cliente():
     print("\nInforme o CPF do cliente (apenas números, sem pontos ou traços):")
@@ -193,6 +198,32 @@ def opcoes_voltar():
 
     except ValueError:
         opcoes_voltar()
+    except KeyboardInterrupt:
+        print("\033[H\033[2J", end="")
+        print("O usuário interrompeu o sistema.")
+    except Exception:
+        print("\033[H\033[2J", end="")
+        print("Ocorreu um erro inesperado, tente novamente.")
+
+def opcoes_resumo(pedido: Pedido):
+    try:
+        opcao = int(readchar.readkey())
+
+        if opcao < 1 or opcao > 2:
+            raise ValueError
+        if opcao == 1:
+            if pedido.cliente_cpf is not None:
+                # procura o cliente pelo CPF e adiciona +1 pedido e +X pontos
+                print("debug")
+            menu.tela_menu()
+            menu.opcoes_menu()
+        else:
+            # Exclui o pedido feito
+            menu.tela_menu()
+            menu.opcoes_menu()
+
+    except ValueError:
+        opcoes_resumo()
     except KeyboardInterrupt:
         print("\033[H\033[2J", end="")
         print("O usuário interrompeu o sistema.")
