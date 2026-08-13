@@ -6,6 +6,7 @@ import auxiliares.cadastro
 
 def tela_menu():
     # Arte em ASCII gerada no site: https://patorjk.com/software/taag/
+    print("\033[H\033[2J", end="")
     print("*********************************************************************************\n")
     print("  _______ _         _____                 ")
     print(" |__   __(_)       |  __ \                ")

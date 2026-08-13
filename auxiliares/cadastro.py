@@ -17,7 +17,7 @@ def tela_cadastro():
 def informacoes_cliente():
     print("\nNome do Cliente:")
     nome = str(input())
-    print("\nCPF do Cliente:")
+    print("\nCPF do Cliente (apenas números, sem pontos ou traços):")
     cpf = str(input())
 
     return nome, cpf
