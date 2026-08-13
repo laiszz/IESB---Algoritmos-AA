@@ -4,7 +4,7 @@ import auxiliares.menu as menu
 from objetos.cliente import Cliente
 
 clientes = [
-    Cliente("123.456.789-10", "Admin", True, 1000, 0)
+    Cliente("12345678910", "Admin", True, 1000, 0)
 ]
 
 def tela_cadastro():
@@ -37,7 +37,7 @@ def opcoes_cadastro():
         opcao = int(readchar.readkey())
 
         if opcao != 0:
-            opcoes_cadastro()
+            raise ValueError
         else:
             menu.tela_menu()
             menu.opcoes_menu()

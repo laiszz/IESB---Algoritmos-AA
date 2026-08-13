@@ -1,7 +1,8 @@
 import readchar
 
-import auxiliares.cardapio
-import auxiliares.cadastro
+import auxiliares.cardapio as cardapio
+import auxiliares.cadastro as cadastro
+import auxiliares.pedido as pedido
 
 
 def tela_menu():
@@ -30,11 +31,15 @@ def opcoes_menu():
             tela_menu()
             opcoes_menu()
         elif opcao == 1:
-            auxiliares.cardapio.escolhe_cardapio()
+            cardapio.escolhe_cardapio()
+        elif opcao == 2:
+            pedido.tela_topo()
+            pedido.definir_cliente_cadastrado()
+            pedido.opcoes_cliente_cadastrado()
         elif opcao == 3:
-            auxiliares.cadastro.tela_cadastro()
-            informacoes_cliente = auxiliares.cadastro.informacoes_cliente()
-            auxiliares.cadastro.cadastrar_cliente(informacoes_cliente[0], informacoes_cliente[1])
+            cadastro.tela_cadastro()
+            informacoes_cliente = cadastro.informacoes_cliente()
+            cadastro.cadastrar_cliente(informacoes_cliente[0], informacoes_cliente[1])
 
     except ValueError:
         tela_menu()

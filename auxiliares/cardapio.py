@@ -1,6 +1,7 @@
 import readchar
 
 from objetos.produto import Produto
+import auxiliares.menu as menu
 
 
 produtos = [
@@ -74,13 +75,12 @@ def escolhe_cardapio():
     print("\nAperte um dos números abaixo para selecionar uma opção:")
     print("\033[1m1\033[0m - Ver o cardápio normal")
     print("\033[1m2\033[0m - Ver o cardápio das promoções")
-    print("\033[1m0\033[0m - Sair")
 
     try:
         opcao = int(readchar.readkey())
 
-        if opcao < 0 or opcao > 2:
-            escolhe_cardapio()
+        if opcao < 1 or opcao > 2:
+            raise ValueError
         elif opcao == 1:
             tela_cardapio(False, monta_cardapio(False))
             opcoes_cardapio(False, monta_cardapio(False))
@@ -102,10 +102,10 @@ def opcoes_cardapio(cardapio_promocional: bool, cardapio: list):
         opcao = int(readchar.readkey())
 
         if opcao != 0:
-            tela_cardapio(cardapio_promocional, cardapio)
-            opcoes_cardapio(cardapio_promocional, cardapio)
+            raise ValueError
         else:
-            print(opcao)
+            menu.tela_menu()
+            menu.opcoes_menu()
 
     except ValueError:
         tela_cardapio(cardapio_promocional, cardapio)
