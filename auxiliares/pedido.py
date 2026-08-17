@@ -53,6 +53,8 @@ def resumo_pedido(quantidades: dict, valor_total: float, pontos_acumulados: int)
 
     print(tabulate(dados_resumo, cabecalho, tablefmt="grid", floatfmt=".2f", stralign="left", numalign="left"))
 
+    print(f"\nValor Total: R${valor_total:.2f}\nPontos acumulados: {pontos_acumulados}")
+
     print("\nDeseja finalizar ou cancelar o pedido?")
     print("\nAperte um dos números abaixo para selecionar uma opção:")
     print("\033[1m1\033[0m - Finalizar")
@@ -68,7 +70,7 @@ def iniciar_pedido(cliente: Cliente | None):
     if cliente is None:
         pedido = Pedido([], 0, None, None, None, None)
     else:
-        pedido = Pedido([], 0, cliente.cpf, cliente.fidelidade, None, None)
+        pedido = Pedido([], 0, cliente.cpf, cliente.fidelidade, 0, 0)
 
     return pedido
 
@@ -113,6 +115,7 @@ def calcula_valor_total(pedido: Pedido):
     if pedido.cliente_fidelidade:
         valor_total *= 0.9
         pontos_acumulados = int(10 * len(pedido.produtos))
+        pedido.pontos_acumulados = pontos_acumulados
 
     return round(valor_total,2), pontos_acumulados
 
@@ -138,6 +141,7 @@ def opcoes_cadastrar_cliente():
             valor_pontos = calcula_valor_total(pedido)
             quantidades = calcula_quantidade_produtos(pedido.produtos)
             resumo_pedido(quantidades, valor_pontos[0], valor_pontos[1])
+            opcoes_resumo(pedido, None)
 
     except ValueError:
         opcoes_cliente_cadastrado()
@@ -171,6 +175,7 @@ def opcoes_cliente_cadastrado():
                 valor_pontos = calcula_valor_total(pedido)
                 quantidades = calcula_quantidade_produtos(pedido.produtos)
                 resumo_pedido(quantidades, valor_pontos[0], valor_pontos[1])
+                opcoes_resumo(pedido, cliente)
         else:
             tela_topo()
             escolher_cadastrar_cliente()
@@ -205,28 +210,33 @@ def opcoes_voltar():
         print("\033[H\033[2J", end="")
         print("Ocorreu um erro inesperado, tente novamente.")
 
-def opcoes_resumo(pedido: Pedido):
+def opcoes_resumo(pedido: Pedido, cliente: Cliente | None):
     try:
         opcao = int(readchar.readkey())
 
         if opcao < 1 or opcao > 2:
             raise ValueError
         if opcao == 1:
-            if pedido.cliente_cpf is not None:
-                # procura o cliente pelo CPF e adiciona +1 pedido e +X pontos
-                print("debug")
+            if cliente is not None:
+                cliente.total_pedidos += 1
+
+                if cliente.fidelidade:
+                    cliente.pontos += pedido.pontos_acumulados
+                    print(cliente.pontos)
+
             menu.tela_menu()
             menu.opcoes_menu()
+            # print(cliente.nome, cliente.total_pedidos, cliente.pontos)
         else:
-            # Exclui o pedido feito
+            del pedido
             menu.tela_menu()
             menu.opcoes_menu()
 
     except ValueError:
-        opcoes_resumo()
+        opcoes_resumo(pedido)
     except KeyboardInterrupt:
         print("\033[H\033[2J", end="")
         print("O usuário interrompeu o sistema.")
-    except Exception:
+    except Exception as e:
         print("\033[H\033[2J", end="")
-        print("Ocorreu um erro inesperado, tente novamente.")
+        print(f"Ocorreu um erro inesperado, tente novamente. {e}")

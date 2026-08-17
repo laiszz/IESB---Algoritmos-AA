@@ -4,7 +4,8 @@ import auxiliares.menu as menu
 from objetos.cliente import Cliente
 
 clientes = [
-    Cliente("12345678910", "Admin", True, 1000, 0)
+    Cliente("12345678910", "Admin", True, 1000, 0),
+    Cliente("37923843880", "Laís Sales Xavier", True, 950, 2)
 ]
 
 def tela_cadastro():
@@ -16,9 +17,9 @@ def tela_cadastro():
 
 def informacoes_cliente():
     print("\nNome do Cliente:")
-    nome = str(input())
+    nome = input()
     print("\nCPF do Cliente (apenas números, sem pontos ou traços):")
-    cpf = str(input())
+    cpf = input()
 
     return nome, cpf
 
