@@ -1,10 +1,19 @@
 class Cliente:
+
+    # ***********************
+    # INICIALIZAÇÃO E ATRIBUTOS
+    # ***********************
+
     def __init__(self, cpf: str, nome: str, fidelidade: bool, pontos: int, total_pedidos: int):
         self.cpf = cpf
         self.nome = nome
         self.fidelidade = fidelidade
         self.pontos = pontos
         self.total_pedidos = total_pedidos
+
+    # ***********************
+    # GETTERS
+    # ***********************
 
     @property
     def cpf(self) -> str:
@@ -25,6 +34,10 @@ class Cliente:
     @property
     def total_pedidos(self) -> int:
         return self._total_pedidos
+
+    # ***********************
+    # SETTERS
+    # ***********************
 
     @cpf.setter
     def cpf(self, value):

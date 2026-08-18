@@ -3,6 +3,9 @@ import readchar
 from objetos.produto import Produto
 import auxiliares.menu as menu
 
+# ***********************
+# LISTA DE PRODUTOS PRÉ-CADASTRADOS
+# ***********************
 
 produtos = [
     Produto(1,"Café Expresso", "Café", "Bebidas", 2.90, False, 2.50, 15),
@@ -15,18 +18,12 @@ produtos = [
     Produto(8, "Fatia de Bolo de Chocolate", "Cacau 50%, Açúcar, Ovo, Farinha de Trigo, Óleo, Leite e Fermeto Químico", "Comidas",7.90, False, 12.90, 15)
 ]
 
-def monta_cardapio(cardapio_promocional: bool) -> list:
-    if cardapio_promocional:
-        lista_promocional = []
+# ***********************
+# TELAS E TEXTOS
+# ***********************
 
-        for produto in produtos:
-            if produto.promocao:
-                lista_promocional.append(produto)
-
-        return lista_promocional
-    else:
-        return produtos
-
+# Mostra o cardápio formatado na tela, com textos que mudam caso seja
+# cardápio promocional
 def tela_cardapio(cardapio_promocional: bool, cardapio: list):
     print("\033[H\033[2J", end="")
     if cardapio_promocional:
@@ -69,50 +66,96 @@ def tela_cardapio(cardapio_promocional: bool, cardapio: list):
     print("\n*********************************************************************************")
     print("\nPressione 0 para sair.")
 
-def escolhe_cardapio():
+def tela_escolhe_cardapio():
     print("\033[H\033[2J", end="")
     print("Deseja ver o cardápio completo ou apenas as promoções?")
     print("\nAperte um dos números abaixo para selecionar uma opção:")
     print("\033[1m1\033[0m - Ver o cardápio normal")
     print("\033[1m2\033[0m - Ver o cardápio das promoções")
 
+# ***********************
+# OPÇÕES E ESCOLHAS
+# ***********************
+
+def escolhe_cardapio():
     try:
+        # Lê apenas um caracter na entrada, sem necessidade do usuário apertar Enter
         opcao = int(readchar.readkey())
 
+        # Se opção inválida, aciona o ValueError
         if opcao < 1 or opcao > 2:
             raise ValueError
+        # Carrega o cardápio normal
         elif opcao == 1:
             tela_cardapio(False, monta_cardapio(False))
             opcoes_cardapio(False, monta_cardapio(False))
+        # Carrega o cardápio promocional
         elif opcao == 2:
             tela_cardapio(True, monta_cardapio(True))
             opcoes_cardapio(False, monta_cardapio(False))
 
+    # Trata o ValueError apenas recarregando a própria função recursivamente
+    # para que o usuário tenha a sensação de que a tela continua estática
+    # até ele pressionar uma opção válida
     except ValueError:
         escolhe_cardapio()
+    # Caso o usuário interrompa o sistema (CTRL + C), limpa a tela e
+    # imprime uma mensagem informativa
     except KeyboardInterrupt:
         print("\033[H\033[2J", end="")
         print("O usuário interrompeu o sistema.")
-    except Exception:
+    # Caso aconteça um erro genérico não tratado anteriormente, limpa a tela
+    # e imprime uma mensagem informativa
+    except Exception as e:
         print("\033[H\033[2J", end="")
-        print("Ocorreu um erro inesperado, tente novamente.")
+        print(f"Ocorreu um erro inesperado, tente novamente. {e}")
 
 def opcoes_cardapio(cardapio_promocional: bool, cardapio: list):
     try:
+        # Lê apenas um caracter na entrada, sem necessidade do usuário apertar Enter
         opcao = int(readchar.readkey())
 
+        # Se opção inválida, aciona o ValueError
         if opcao != 0:
             raise ValueError
+        # Carrega o Menu Principal
         else:
             menu.tela_menu()
             menu.opcoes_menu()
 
+    # Trata o ValueError apenas recarregando a própria função recursivamente
+    # para que o usuário tenha a sensação de que a tela continua estática
+    # até ele pressionar uma opção válida
     except ValueError:
         tela_cardapio(cardapio_promocional, cardapio)
         opcoes_cardapio(cardapio_promocional, cardapio)
+    # Caso o usuário interrompa o sistema (CTRL + C), limpa a tela e
+    # imprime uma mensagem informativa
     except KeyboardInterrupt:
         print("\033[H\033[2J", end="")
         print("O usuário interrompeu o sistema.")
-    except Exception:
+    # Caso aconteça um erro genérico não tratado anteriormente, limpa a tela
+    # e imprime uma mensagem informativa
+    except Exception as e:
         print("\033[H\033[2J", end="")
-        print("Ocorreu um erro inesperado, tente novamente.")
+        print(f"Ocorreu um erro inesperado, tente novamente. {e}")
+
+# ***********************
+# PROCESSAMENTO
+# ***********************
+
+# Retorna uma lista com os produtos pertencentes ao
+# cardápio norma/promocional
+def monta_cardapio(cardapio_promocional: bool) -> list:
+    # Adiciona à lista e retorna apenas produtos em promoção
+    if cardapio_promocional:
+        lista_promocional = []
+
+        for produto in produtos:
+            if produto.promocao:
+                lista_promocional.append(produto)
+
+        return lista_promocional
+    # Retorna a lista pré-cadastrada
+    else:
+        return produtos
