@@ -92,7 +92,7 @@ def escolhe_cardapio():
         # Carrega o cardápio promocional
         elif opcao == 2:
             tela_cardapio(True, monta_cardapio(True))
-            opcoes_cardapio(False, monta_cardapio(False))
+            opcoes_cardapio(True, monta_cardapio(True))
 
     # Trata o ValueError apenas recarregando a própria função recursivamente
     # para que o usuário tenha a sensação de que a tela continua estática
