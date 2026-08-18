@@ -23,6 +23,11 @@ def tela_cadastro():
     print("_________________________________________________________________________________\n")
     print("\nPreencha com as informações do Cliente:")
 
+def tela_cadastrado(nome: str):
+    print(f"\nCliente \"{nome}\" cadastrado(a) com sucesso!")
+    print("\n*********************************************************************************")
+    print("\nPressione 0 para sair.")
+
 # ***********************
 # OPÇÕES E ESCOLHAS
 # ***********************
@@ -78,8 +83,5 @@ def cadastrar_cliente(nome: str, cpf: str):
     # Adiciona o novo Cliente à lista de clientes cadastrados
     clientes.append(novo_cliente)
 
-    print(f"\nCliente \"{nome}\" cadastrado(a) com sucesso!")
-    print("\n*********************************************************************************")
-    print("\nPressione 0 para sair.")
-
+    tela_cadastrado(nome)
     opcoes_cadastro()
