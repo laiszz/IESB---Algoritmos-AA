@@ -70,7 +70,7 @@ def tela_escolhe_cardapio():
     print("\033[H\033[2J", end="")
     print("Deseja ver o cardápio completo ou apenas as promoções?")
     print("\nAperte um dos números abaixo para selecionar uma opção:")
-    print("\033[1m1\033[0m - Ver o cardápio padrão")
+    print("\033[1m1\033[0m - Ver o cardápio completo")
     print("\033[1m2\033[0m - Ver o cardápio das promoções")
 
 # ***********************
@@ -85,7 +85,7 @@ def escolhe_cardapio():
         # Se opção inválida, aciona o ValueError
         if opcao < 1 or opcao > 2:
             raise ValueError
-        # Carrega o cardápio padrão
+        # Carrega o cardápio completo
         elif opcao == 1:
             tela_cardapio(False, monta_cardapio(False))
             opcoes_cardapio(False, monta_cardapio(False))
